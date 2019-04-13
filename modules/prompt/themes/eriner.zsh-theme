@@ -70,12 +70,12 @@ prompt_eriner_main() {
   # spawned shell? Who and where am I (user@hostname)?
   prompt_eriner_status() {
     local segment=''
-    (( prompt_eriner_retval )) && segment+=' %F{red}✘'
+    (( prompt_eriner_retval )) && segment+='%F{red}✘ '
     (( UID == 0 )) && segment+=' %F{yellow}⚡'
     (( $(jobs -l | wc -l) )) && segment+=' %F{cyan}⚙'
     (( RANGER_LEVEL )) && segment+=' %F{cyan}r'
     if [[ ${USER} != ${DEFAULT_USER} || -n ${SSH_CLIENT} ]]; then
-       segment+=" %F{%(!.yellow.default)}${USER}@%m"
+       segment+="%F{%(!.yellow.default)}${USER}@%m"
     fi
     if [[ -n ${segment} ]]; then
       prompt_eriner_segment ${prompt_eriner_color1} "${segment} "
